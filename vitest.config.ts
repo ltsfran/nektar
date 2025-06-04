@@ -10,13 +10,13 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: ['./test/setup.ts', './test/next.tsx'],
     globals: true,
-    css: true,
     include: [
       'src/**/*.{test,spec}.{js,jsx,ts,tsx}',
       'test/**/*.{test,spec}.{js,jsx,ts,tsx}'
     ],
     exclude: [
       'src/app/layout.{js,jsx,ts,tsx}',
+      'src/app/global-error.{js,jsx,ts,tsx}',
       '**/*.server.{js,jsx,ts,tsx}'
     ],
     coverage: {
@@ -31,6 +31,7 @@ export default defineConfig({
         '.next/**',
         'public/**',
         'src/app/layout.{js,jsx,ts,tsx}',
+        'src/app/global-error.{js,jsx,ts,tsx}',
         '**/*.server.{js,jsx,ts,tsx}'
       ],
       thresholds: {
