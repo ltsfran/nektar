@@ -1,4 +1,3 @@
-import { CookieNames } from '@/constants'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function middleware(request: NextRequest) {
@@ -12,11 +11,6 @@ export async function middleware(request: NextRequest) {
         status: 500
       }
     )
-    rewriteResponse.cookies.set({
-      name: CookieNames.Digest,
-      value: 'digest',
-      httpOnly: true
-    })
     return rewriteResponse
   }
 }
