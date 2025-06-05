@@ -28,5 +28,5 @@
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "cSpell.words": ["logomark", "nektar"]
+  "cSpell.words": ["esbuild", "logomark", "nektar"]
 }
