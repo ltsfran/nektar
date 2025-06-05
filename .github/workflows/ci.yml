@@ -13,11 +13,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  install:
-    name: Install dependencies
+  build:
     runs-on: ubuntu-latest
-    outputs:
-      cache-key: ${{ steps.cache.outputs.cache-key }}
     steps:
       - name: Checkout git repository
         uses: actions/checkout@v4
@@ -31,75 +28,11 @@ jobs:
           cache: "pnpm"
       - name: Install dependencies
         run: pnpm install
-
-  lint:
-    needs: [install]
-    name: Lint code
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout git repository
-        uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-          cache: "pnpm"
       - name: Lint code
         run: pnpm run lint
-
-  format:
-    needs: [install]
-    name: Check formatting
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout git repository
-        uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-          cache: "pnpm"
       - name: Check formatting
         run: pnpm run format:check
-
-  test:
-    needs: [install]
-    name: Run tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout git repository
-        uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-          cache: "pnpm"
       - name: Run tests with coverage
         run: pnpm run test:coverage
-
-  build:
-    needs: [install]
-    name: Build app
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout git repository
-        uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-          cache: "pnpm"
       - name: Build app
         run: pnpm run build
